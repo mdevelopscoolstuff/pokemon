@@ -42,4 +42,25 @@ var pokemonList = [
   
   
   console.log(pokemonList);
+// Loop through each item in pokemonList
+  for (var i = 0; i < pokemonList.length; i++) {
+    var pokemon = pokemonList[i];
+    var pokemonInfo = pokemon.name + " (height: " + pokemon.height + ")";
+    document.write(pokemonInfo + "<br>");
+  }
+  var maxHeightForSpecial = 5; //  value to your preferred threshold
+
+// Loop through each item in pokemonList
+for (var i = 0; i < pokemonList.length; i++) {
+  var pokemon = pokemonList[i];
+  var pokemonInfo = pokemon.name + " (height: " + pokemon.height + ")";
+  
+  // Check if the Pokémon's height is above the special threshold
+  if (pokemon.height > maxHeightForSpecial) {
+    pokemonInfo += " - Wow, that’s big!";
+  }
+  
+  document.write(pokemonInfo + "<br>");
+}
+  
   
