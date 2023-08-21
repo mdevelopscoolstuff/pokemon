@@ -62,5 +62,49 @@ for (var i = 0; i < pokemonList.length; i++) {
   
   document.write(pokemonInfo + "<br>");
 }
+var imageContainer = document.getElementById("imageContainer");
   
+  pokemonList.forEach(function(pokemon) {
+    var pokemonInfo = pokemon.name + " (height: " + pokemon.height + ")";
+    
+    
+    if (pokemon.height > 5) {
+      pokemonInfo += " - Wow, that’s big!";
+    }
+    
+   
+    var imgElement = document.createElement("img");
+    imgElement.src = pokemon.imageUrl;
+    imgElement.alt = pokemon.name;
+    imageContainer.appendChild(imgElement);
+    imageContainer.appendChild(document.createTextNode(pokemonInfo));
+    imageContainer.appendChild(document.createElement("br"));
+  });
+  var pokemonRepository = (function() {
+    return {
+      getAll: function() {
+        return pokemonList;
+      },
+      add: function(item) {
+        if (typeof item === "object" && item.name && item.height && item.types) {
+          pokemonList.push(item);
+        } else {
+          console.log("Invalid Pokémon data.");
+        }
+      }
+    };
+  })();
+  
+  
+  var allPokemons = pokemonRepository.getAll();
+  console.log(allPokemons);
+  
+  var newPokemon = {
+    name: "Bulbasaur",
+    height: 7,
+    types: ["grass", "poison"],
+    imageUrl: "https://example.com/bulbasaur.jpg"
+  };
+  pokemonRepository.add(newPokemon);
+  console.log(pokemonRepository.getAll());  
   
