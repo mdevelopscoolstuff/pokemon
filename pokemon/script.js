@@ -62,8 +62,6 @@ for (var i = 0; i < pokemonList.length; i++) {
   
   document.write(pokemonInfo + "<br>");
 }
-var imageContainer = document.getElementById("imageContainer");
-  
   pokemonList.forEach(function(pokemon) {
     var pokemonInfo = pokemon.name + " (height: " + pokemon.height + ")";
     
