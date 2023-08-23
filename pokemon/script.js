@@ -154,10 +154,6 @@ function addListItem(pokemon) {
       console.log(pokemon);
     }
   
-    return {
-      getAll: function() {
-        return pokemonList;
-      },
       add: function(item) {
         if (typeof item === "object" && item.name && item.height && item.types) {
           pokemonList.push(item);
@@ -193,28 +189,4 @@ function addListItem(pokemon) {
       showDetails(pokemon);
     });
   }
-
-  function showDetails(pokemon) {
-    console.log(pokemon);
-  }
-
-  return {
-    getAll: function() {
-      return pokemonList;
-    },
-    add: function(item) {
-      if (typeof item === "object" && item.name && item.height && item.types) {
-        pokemonList.push(item);
-      } else {
-        console.log("Invalid Pokémon data.");
-      }
-    },
-    addListItem: addListItem
-  };
-
-
-// Loop through the Pokémon list and use addListItem function
-pokemonRepository.getAll().forEach(function(pokemon) {
-  pokemonRepository.addListItem(pokemon);
-});
 
