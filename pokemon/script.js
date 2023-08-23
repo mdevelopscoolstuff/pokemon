@@ -105,4 +105,116 @@ for (var i = 0; i < pokemonList.length; i++) {
   };
   pokemonRepository.add(newPokemon);
   console.log(pokemonRepository.getAll());  
+
+function addListItem(pokemon) {
+      var list = document.querySelector(".pokemon-list");
+      var listItem = document.createElement("li");
+      var button = document.createElement("button");
+      button.innerText = pokemon.name;
+      button.classList.add("pokemon-button");
+      listItem.appendChild(button);
+      list.appendChild(listItem);
   
+      // Add event listener to the button
+      button.addEventListener("click", function() {
+        showDetails(pokemon);
+      });
+    }
+  
+    function showDetails(pokemon) {
+      console.log(pokemon);
+      // You can implement further details display logic here
+    }
+  
+    return {
+      getAll: function() {
+        return pokemonList;
+      },
+      add: function(item) {
+        if (typeof item === "object" && item.name && item.height && item.types) {
+          pokemonList.push(item);
+        } else {
+          console.log("Invalid Pokémon data.");
+        }
+      },
+      addListItem: addListItem
+    };
+
+// Loop through the Pokémon list and use addListItem function
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+  
+  // note test//
+  function addListItem(pokemon) {
+      // ... (previous code)
+    }
+  
+    function showDetails(pokemon) {
+      console.log(pokemon);
+    }
+  
+    return {
+      getAll: function() {
+        return pokemonList;
+      },
+      add: function(item) {
+        if (typeof item === "object" && item.name && item.height && item.types) {
+          pokemonList.push(item);
+        } else {
+          console.log("Invalid Pokémon data.");
+        }
+      },
+      addListItem: addListItem
+    };
+  
+  
+  // Loop through the Pokémon list and use addListItem function
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+  
+  // Call the showDetails function on a specific Pokémon object
+  var specificPokemon = pokemonRepository.getAll()[0]; // Change index as needed
+  pokemonRepository.showDetails(specificPokemon);
+  
+ // note test 2//
+ function addListItem(pokemon) {
+    var list = document.querySelector(".pokemon-list");
+    var listItem = document.createElement("li");
+    var button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("pokemon-button");
+    listItem.appendChild(button);
+    list.appendChild(listItem);
+
+    // Add event listener to the button
+    button.addEventListener("click", function() {
+      showDetails(pokemon);
+    });
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  return {
+    getAll: function() {
+      return pokemonList;
+    },
+    add: function(item) {
+      if (typeof item === "object" && item.name && item.height && item.types) {
+        pokemonList.push(item);
+      } else {
+        console.log("Invalid Pokémon data.");
+      }
+    },
+    addListItem: addListItem
+  };
+
+
+// Loop through the Pokémon list and use addListItem function
+pokemonRepository.getAll().forEach(function(pokemon) {
+  pokemonRepository.addListItem(pokemon);
+});
+
