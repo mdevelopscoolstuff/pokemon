@@ -151,5 +151,81 @@ pokemonRepository.LoadList().then(function() {
   });
 });
 
+//note 2 task,1.7//
+var pokemonRepository = (function() {
+  var pokemonList = [];
+
+  function addListItem(pokemon) {
+    // ... (previous code)
+  }
+
+  function showDetails(pokemon) {
+    pokemonRepository.loadDetails(pokemon).then(function() {
+      console.log(pokemon); // Log the Pokémon details retrieved from API
+      // Further logic to display details in the interface can be added here
+    });
+  }
+
+  function loadList() {
+    return fetch("https://pokeapi.co/api/v2/pokemon/")
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        data.results.forEach(function(item) {
+          var pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          pokemonRepository.add(pokemon);
+        });
+      })
+      .catch(function(error) {
+        console.error("Error loading Pokémon list:", error);
+      });
+  }
+
+  function loadDetails(pokemon) {
+    var url = pokemon.detailsUrl;
+    return fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(details) {
+        pokemon.imageUrl = details.sprites.front_default;
+        pokemon.height = details.height;
+      })
+      .catch(function(error) {
+        console.error("Error loading Pokémon details:", error);
+      });
+  }
+
+  return {
+    getAll: function() {
+      return pokemonList;
+    },
+    add: function(item) {
+      if (typeof item === "object" && item.name && item.detailsUrl) {
+        pokemonList.push(item);
+      } else {
+        console.log("Invalid Pokémon data.");
+      }
+    },
+    addListItem: addListItem,
+    LoadList: loadList,
+    loadDetails: loadDetails
+  };
+})();
+
+// Load the list of Pokémon and their details
+pokemonRepository.LoadList().then(function() {
+  var allPokemons = pokemonRepository.getAll();
+
+  // Loop through the Pokémon list and use addListItem function
+  allPokemons.forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+});
+
 
 
