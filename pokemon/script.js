@@ -80,5 +80,76 @@ var pokemonList = [
 pokemonRepository.getAll().forEach(function(pokemon) {
   pokemonRepository.addListItem(pokemon);
 });
+//task1.7 note//
+var pokemonRepository = (function() {
+  var pokemonList = [];
+
+  function addListItem(pokemon) {
+    // ... (previous code)
+  }
+
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  function loadList() {
+    return fetch("https://pokeapi.co/api/v2/pokemon/")
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(data) {
+        data.results.forEach(function(item) {
+          var pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function(error) {
+        console.error("Error loading Pokémon list:", error);
+      });
+  }
+
+  function loadDetails(pokemon) {
+    var url = pokemon.detailsUrl;
+    return fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(details) {
+        pokemon.imageUrl = details.sprites.front_default;
+        pokemon.height = details.height;
+      })
+      .catch(function(error) {
+        console.error("Error loading Pokémon details:", error);
+      });
+  }
+
+  return {
+    getAll: function() {
+      return pokemonList;
+    },
+    add: function(item) {
+      if (typeof item === "object" && item.name && item.detailsUrl) {
+        pokemonList.push(item);
+      } else {
+        console.log("Invalid Pokémon data.");
+      }
+    },
+    addListItem: addListItem,
+    LoadList: loadList,
+    loadDetails: loadDetails
+  };
+})();
+
+// Load the list of Pokémon and add them to the pokemonList
+pokemonRepository.LoadList().then(function() {
+  // Now that the list is loaded, you can add list items and details
+  pokemonRepository.getAll().forEach(function(pokemon) {
+    pokemonRepository.addListItem(pokemon);
+  });
+});
+
 
 
