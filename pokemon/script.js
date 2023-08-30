@@ -226,6 +226,70 @@ pokemonRepository.LoadList().then(function() {
     pokemonRepository.addListItem(pokemon);
   });
 });
+//task 1.8 note 1//
+var pokemonRepository = (function() {
+  // ... (previous code)
 
+  function showDetails(pokemon) {
+    pokemonRepository.loadDetails(pokemon).then(function() {
+      showModal(pokemon); // Open the modal with Pokémon details
+    });
+  }
 
+  function showModal(pokemon) {
+    var modalContainer = document.querySelector("#modal-container");
+    modalContainer.innerHTML = ""; // Clear existing content
+
+    var modal = document.createElement("div");
+    modal.classList.add("modal");
+
+    var closeButton = document.createElement("button");
+    closeButton.classList.add("modal-close");
+    closeButton.innerText = "Close";
+
+    closeButton.addEventListener("click", hideModal);
+
+    var nameElement = document.createElement("h2");
+    nameElement.innerText = pokemon.name;
+
+    var heightElement = document.createElement("p");
+    heightElement.innerText = "Height: " + pokemon.height;
+
+    modalContainer.appendChild(modal);
+    modalContainer.classList.add("is-visible");
+  }
+
+  function hideModal() {
+    var modalContainer = document.querySelector("#modal-container");
+    modalContainer.classList.remove("is-visible");
+  }
+
+  // ... (return object)
+
+  // Return additional functions as needed
+  return {
+    // ...
+    showDetails: showDetails
+  };
+})();
+
+// ... (load list and add list items)
+
+// Event listener to close the modal on overlay click
+document.querySelector("#modal-container").addEventListener("click", function(event) {
+  var modalContainer = document.querySelector("#modal-container");
+  if (event.target === modalContainer) {
+    pokemonRepository.hideModal();
+  }
+});
+
+// Event listener to close the modal on ESC key press
+window.addEventListener("keydown", function(event) {
+  var modalContainer = document.querySelector("#modal-container");
+  if (event.key === "Escape" && modalContainer.classList.contains("is-visible")) {
+    pokemonRepository.hideModal();
+  }
+});
+
+//end note 1.8//
 
