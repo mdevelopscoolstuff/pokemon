@@ -88,10 +88,6 @@ var pokemonRepository = (function() {
     // ... (previous code)
   }
 
-  function showDetails(pokemon) {
-    console.log(pokemon);
-  }
-
   function loadList() {
     return fetch("https://pokeapi.co/api/v2/pokemon/")
       .then(function(response) {
