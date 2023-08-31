@@ -159,12 +159,7 @@ var pokemonRepository = (function() {
     // ... (previous code)
   }
 
-  function showDetails(pokemon) {
-    pokemonRepository.loadDetails(pokemon).then(function() {
-      console.log(pokemon); // Log the Pokémon details retrieved from API
-      // Further logic to display details in the interface can be added here
-    });
-  }
+  
 
   function loadList() {
     return fetch("https://pokeapi.co/api/v2/pokemon/")
