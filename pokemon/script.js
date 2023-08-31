@@ -84,10 +84,6 @@ pokemonRepository.getAll().forEach(function(pokemon) {
 var pokemonRepository = (function() {
   var pokemonList = [];
 
-  function addListItem(pokemon) {
-    // ... (previous code)
-  }
-
   function loadList() {
     return fetch("https://pokeapi.co/api/v2/pokemon/")
       .then(function(response) {
