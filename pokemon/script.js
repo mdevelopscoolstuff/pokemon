@@ -207,12 +207,6 @@ pokemonRepository.LoadList().then(function() {
 var pokemonRepository = (function() {
   // ... (previous code)
 
-  function showDetails(pokemon) {
-    pokemonRepository.loadDetails(pokemon).then(function() {
-      showModal(pokemon); // Open the modal with Pokémon details
-    });
-  }
-
   function showModal(pokemon) {
     var modalContainer = document.querySelector("#modal-container");
     modalContainer.innerHTML = ""; // Clear existing content
