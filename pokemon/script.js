@@ -127,17 +127,7 @@ var pokemonRepository = (function() {
       return pokemonList;
     },
     add: function(item) {
-      if (typeof item === "object" && item.name && item.detailsUrl) {
-        pokemonList.push(item);
-      } else {
-        console.log("Invalid Pokémon data.");
-      }
-    },
-    addListItem: addListItem,
-    LoadList: loadList,
-    loadDetails: loadDetails
-  };
-})();
+    
 
 // Load the list of Pokémon and add them to the pokemonList
 pokemonRepository.LoadList().then(function() {
